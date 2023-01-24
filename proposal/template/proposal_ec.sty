@@ -1,0 +1,102 @@
+% research-proposal.sty 21-Dec-92
+% version 1.0 25-Dec-92 by H. Yokota
+% version 1.1 10-Jun-94 by S. Sato
+% version 1.2 10-Nov-00 by H. Naitou
+
+\typeout{Style File: `proposal' <10 Nov 00>.}
+
+%\input jarticle.cls
+
+\oddsidemargin = 0mm
+\textwidth = 168mm 
+\topmargin = -10mm
+\headheight = 0mm
+\textheight = 245mm
+\columnsep = 6mm
+
+\pagestyle{empty}
+
+\def\氏名#1{\def\@氏名{#1}}
+\def\学籍番号#1{\def\@学籍番号{#1}}
+\def\指導教員#1{\def\@指導教員{#1}}
+%\def\副指導教員#1{\def\@副指導教員{#1}}
+%\def\主テーマ指導教員#1{\def\@主テーマ指導教員{#1}}
+%\def\副テーマ指導教員#1{\def\@副テーマ指導教員{#1}}
+
+% \longを追加   by S. Sato
+\long\def\研究テーマ#1{\def\@研究テーマ{#1}}
+\long\def\研究の目的#1{\def\@研究の目的{#1}}
+\long\def\研究の背景・特色#1{\def\@研究の背景・特色{#1}}
+\long\def\研究計画・方法#1{\def\@研究計画・方法{#1}}
+\long\def\参考文献#1{\def\@参考文献{#1}}
+
+%\def\現在までに単位修得した専門教科#1{
+%\def\@現在までに単位修得した専門教科{#1}}
+%\def\専門教科数#1{\def\@専門教科数{#1}}
+%\def\専門分野数#1{\def\@専門分野数{#1}}
+
+\def\ボックス#1#2#3{%
+  \vspace{3mm}
+  \noindent
+  \begin{tabular}[t]{|p{3mm} p{150mm} p{2mm}|}
+    \hline
+    \multicolumn{3}{|l|}{\bf ＜#2＞} \\
+    \hline
+    \multicolumn{3}{|l|}{\parbox[t]{10mm}{\vspace{-5mm}}} \\
+    \parbox[t]{1mm}{\vspace{#1}} & \parbox[t]{150mm}{\parindent = 1zw #3} & {}\\
+    \hline
+  \end{tabular}}
+%% \parindent = 1zwを追加 by S. Sato
+
+\def\要素#1{\vspace{0.1mm} #1 \vspace{2.2mm}}
+
+\def\行#1#2{%
+  \要素{\bf #1} & \要素{#2} & {\scriptsize 印} }
+
+\def\フットノート{
+  \begin{center}
+    {\small 長岡工業高等専門学校 佐藤研究室 %
+            研究計画提案書フォーム 第\arabic{page}頁}
+  \end{center}}
+
+\def\フォーム作成{%
+  \newpage
+  \begin{center}{\Large 研究計画提案書} \end{center}
+  \vspace{-8mm}
+  \begin{flushright}{\small \@date} \end{flushright}
+  \begin{tabular}[b]{|p{28mm}|p{47mm}||p{28mm}|p{47mm}|}
+    \hline
+    \要素{\bf 氏名} & \要素{\@氏名}
+    & \要素{\bf 学籍番号} & \要素{\@学籍番号} \\
+    \hline
+  \end{tabular}
+
+  \vspace{3mm}
+  \noindent
+  \begin{tabular}[b]{|p{28mm}|p{38mm}|p{4.7mm}|}
+%    \hline
+%    \行{主テーマ指導教員}{\@主テーマ指導教員}%
+%      {副テーマ指導教員}{\@副テーマ指導教員} \\
+%    \hline
+    \hline
+    \行{指導教員}{\@指導教員} \\
+    \hline  
+  \end{tabular}
+
+  \ボックス{6mm}{研究テーマ}{\noindent \@研究テーマ}  %% この欄はインデントしない
+                                                      %% 
+
+  \ボックス{126mm}{研究の背景・特色}{\@研究の背景・特色}
+
+  \ボックス{12mm}{研究の目的}{\@研究の目的}
+
+  \フットノート
+
+  \newpage
+  \ボックス{132mm}{研究計画・方法}{\@研究計画・方法}
+
+  \ボックス{60mm}{参考文献}{\@参考文献}
+
+  \フットノート
+}
+
