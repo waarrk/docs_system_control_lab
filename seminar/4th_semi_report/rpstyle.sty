@@ -1,0 +1,161 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       zemi.sty
+%                                       
+%
+%       滑川研の発表用ゼミ用スタイルファイル
+%
+%       LaTeX の文章の一例を示す
+%       \documentstyle[twocolumn,a4j,epsf,zemi]{jarticle}
+%          \title{タイトル}
+%          \author{所属研究室 \and 氏名}
+%          \date{日付け}
+%		   \abstract{Abstract}
+%          \keyword{Key Words}	
+%       \begin{document}
+%          \maketitle
+%          \section{まえがき}
+%               本文
+%       \end{document}
+
+\def\title#1{\gdef\@title{#1}}
+\def\@title{}
+\def\abstract#1{\gdef\@abstract{#1}}
+\def\@abstract{}
+\def\keyword#1{\gdef\@keyword{#1}}
+\def\@keyword{}
+\def\fnum@figure{Fig. \thefigure} % 図 or Fig の変更はここでおこなう
+\def\fnum@table{Table \thetable} % 表
+
+\newlength{\rengoleftmargin}
+\newlength{\rengorightmargin}
+\newlength{\rengotopmargin}
+\newlength{\rengopaperwidth}
+\newlength{\rengopaperheight}
+\newlength{\rengofootmargin}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%       ページ位置などの細かい位置は    %
+%       ここのマージンの調整で行なう。  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%       用紙サイズ
+%
+\setlength{\rengopaperwidth}{21cm}
+\setlength{\rengopaperheight}{29.6cm}
+%
+%       上下左右のマージン
+%
+\setlength{\rengotopmargin}{17mm}
+\setlength{\rengoleftmargin}{20mm}
+\setlength{\rengorightmargin}{15mm}
+\setlength{\rengofootmargin}{23mm}
+%
+%%%%%%%%ここまで%%%%%%%%%%%%%%%%%%%%%
+
+\columnsep18pt 
+\headheight0pt % デフォルトのヘッダ部は削除
+\headsep0pt
+\footskip30pt
+%\footheight15pt
+\setlength{\baselineskip}{10mm}
+\topmargin-1in
+\addtolength{\topmargin}{\rengotopmargin} % topmargin{20mm}
+\oddsidemargin-1in
+\evensidemargin-1in
+\addtolength{\oddsidemargin}{\rengoleftmargin} 
+\addtolength{\evensidemargin}{\rengoleftmargin}
+\setlength{\textwidth}{\rengopaperwidth}
+\addtolength{\textwidth}{-\rengoleftmargin}
+\addtolength{\textwidth}{-\rengorightmargin} % textwidth{175mm}
+\setlength{\textheight}{\rengopaperheight}   
+\addtolength{\textheight}{-\rengotopmargin}
+\addtolength{\textheight}{-\rengofootmargin} % textwidth{25.6mm}
+
+\def\maketitle{\par
+ \begingroup
+ \def\thefootnote{\fnsymbol{footnote}}
+ \def\@makefnmark{\hbox 
+ to 0pt{$^{\@thefnmark}$\hss}} 
+ \if@twocolumn 
+ \twocolumn[\@maketitle]
+ \else \newpage
+ \global\@topnum\z@ \@maketitle \fi
+ \pagestyle{plain}
+ \thispagestyle{plain}
+ \@thanks
+ \endgroup
+ \setcounter{footnote}{0}
+ \let\maketitle\relax
+ \let\@maketitle\relax
+ \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\let\thanks\relax}
+
+\def\@maketitle{\newpage
+ \null
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % タイトルの上の隙間は、これを変更
+ \vskip 0cm
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \hfill
+\begin{center}%
+ \begin{minipage}{15cm}
+ \begin{center}
+  {{\LARGE \lineskip .5em
+   \begin{tabular}[t]{c}
+    \@title
+   \end{tabular}\par}}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % タイトルと名前の隙間は、これを変更
+  \vskip 2mm
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  {\large \lineskip .5em
+   \begin{tabular}[t]{c}
+    \@author
+   \end{tabular}\par} 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % 名前と日付の隙間は、これを変更
+  \vskip 2mm
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  {\large \lineskip .5em
+   \begin{tabular}[t]{c}
+    \@date 
+   \end{tabular}\par} 
+   \end{center}
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % 日付とabstractの隙間は、これを変更  %
+  \vskip 0mm
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  {{\large \bf Abstract}:　\@abstract \par}
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % abstractとkeywordの隙間は、これを変更  %
+  \vskip 0mm
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  {{\large \bf Key Words}:　\@keyword \par} 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  % abstractと本文の隙間は、これを変更  %
+  \vskip 0mm
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \end{minipage}%
+\end{center}%
+\vspace*{0.5mm}
+ \par
+}
+
+\def\section{\@startsection {section}{1}{\z@}{1ex plus 0.3ex minus 
+ .1ex}{0.5ex plus .1ex}{\Large\bf}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{0.5ex plus 0.2ex minus 
+ .05ex}{0.3ex plus .1ex}{\large\bf}}
+\def\subsubsection{\@startsection{subsubsection}{3}{\z@}{0.5ex plus 
+.2ex minus .05ex}{0.3ex plus .1ex}{\normalsize\bf}}
+\def\paragraph{\@startsection
+ {paragraph}{4}{\z@}{0.5ex plus .2ex minus .05ex}{-.2em}{\normalsize\bf}}
+\def\subparagraph{\@startsection
+ {subparagraph}{4}{\parindent}{0.5ex plus .2ex minus 
+ .05ex}{-.2em}{\normalsize\bf}}
+
+
+%%% Local Variables: %%%
+%%% mode: tex %%%
+%%% tab-width: 4 %%%
+%%% End: %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
